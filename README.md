@@ -34,7 +34,7 @@ npx jest
 
 ---
 
-## Example case: Classical menswear store
+<!--## Example case: Classical menswear store
 
 This template was designed with stores in mind where:
 - stock levels are low
@@ -81,3 +81,4 @@ While this example focuses on menswear, the same approach applies to:
 - jewelers
 - limited edition drops
 - rental or reservation-based businesses
+-->
