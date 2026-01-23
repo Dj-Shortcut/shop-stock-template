@@ -1,0 +1,96 @@
+openapi: 3.0.0
+info:
+  title: Shop Stock API
+  version: 1.0.0
+  description: Backend API for stock reservation and inventory handling
+paths:
+  /stock/{productId}:
+    get:
+      summary: Get stock by product ID
+      parameters:
+        - in: path
+          name: productId
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - in: query
+          name: locationId
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Current stock
+  /stock/reserve:
+    post:
+      summary: Reserve stock by product ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - productId
+                - locationId
+                - quantity
+              properties:
+                productId:
+                  type: string
+                  format: uuid
+                locationId:
+                  type: string
+                  format: uuid
+                quantity:
+                  type: integer
+                  minimum: 1
+      responses:
+        "201":
+          description: Stock reserved
+  /stock/sku/{sku}:
+    get:
+      summary: Get stock by SKU
+      parameters:
+        - in: path
+          name: sku
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: locationId
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Current stock
+  /stock/sku/reserve:
+    post:
+      summary: Reserve stock by SKU
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - sku
+                - locationId
+                - quantity
+              properties:
+                sku:
+                  type: string
+                locationId:
+                  type: string
+                  format: uuid
+                quantity:
+                  type: integer
+                  minimum: 1
+      responses:
+        "201":
+          description: Stock reserved
+components: {}
+tags: []
