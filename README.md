@@ -68,4 +68,6 @@ Stock is calculated as the **sum of stock movements**, ensuring:
 The API is fully documented using **OpenAPI (Swagger)**.
 
 When running locally, the documentation is available at:
+## License
+This project is licensed under the MIT License. © 2026 [jouw naam]
 
