@@ -41,3 +41,10 @@ cp .env.example .env
 npx prisma migrate dev
 npx prisma generate
 npm run dev
+
+```
+## Design Decisions
+
+Key architectural and technical decisions are documented here:
+
+- [Design Decisions](./docs/decisions.md)
