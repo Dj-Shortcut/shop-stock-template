@@ -31,7 +31,7 @@ npm install
 npx prisma generate
 npx prisma db push
 npx jest
-
+```
 ---
 
 <!--## Example case: Classical menswear store
