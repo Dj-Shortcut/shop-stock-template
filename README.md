@@ -1,84 +1,71 @@
 # shop-stock-template
 
-A reusable backend core for inventory and order handling.
+A **backend-only API** for reliable inventory and order handling, built with a
+**movement-based stock model** to guarantee consistency under concurrent access.
 
-## What this template provides
-- Event-based stock system (no direct stock counters)
-- Safe stock reservations (race-condition protected)
-- Transactional operations
-- Prisma ORM with SQLite for local use
-- Jest test suite
-- Clean, reusable project structure
+> ⚠️ This repository contains a **backend-only service**.  
+> It does **not** include a frontend or user interface by design.
 
-## What this template does NOT include
-- Frontend / UI
-- Payments
-- Authentication
-- Deployment setup
-- Client-specific logic
-
-## Tech stack
-- Node.js
-- TypeScript
-- Prisma
-- SQLite (local / tests)
-- Jest
-
-## Getting started
-
-```bash
-npm install
-npx prisma generate
-npx prisma db push
-npx jest
-```
 ---
 
-## Example case: Classical menswear store
+## What this template provides
 
-This template was designed with stores in mind where:
-- stock levels are low
-- item value is high
-- mistakes are expensive
+- Event-based stock system (no mutable stock counters)
+- Safe stock reservations (race-condition protected)
+- Transactional operations using database transactions
+- SKU-based and UUID-based stock endpoints
+- Prisma ORM with SQLite for local development and testing
+- Zod validation for API inputs
+- Jest test suite
+- OpenAPI / Swagger documentation
+- Clean, reusable project structure
 
-### Context
-A classical menswear store selling:
-- tailored suits
-- dress shirts
-- shoes
-- accessories
+---
 
-Products are sold both:
-- in-store (fitting & advice)
-- online (reservation or purchase)
+## What this template does NOT include
 
-### The problem
-In many systems, stock is tracked as a simple number.
-This often leads to issues such as:
-- double-selling the last available item
-- inconsistent stock between webshop and store
-- manual fixes after mistakes
+- Frontend / UI
+- Authentication or authorization
+- Payments
+- Deployment configuration
+- Client-specific business logic
 
-### Real-world scenario
-There is exactly **1 navy suit, size 50** in stock.
+This repository is intended to be used as a **core backend service** that can be
+extended or integrated into larger systems.
 
-Two customers attempt to reserve it almost simultaneously:
-- one in-store
-- one online
+---
 
-In this system:
-- only one reservation succeeds
-- the second attempt fails immediately
-- stock remains correct at all times
+## Tech stack
 
-### Why this matters
-For stores where trust and quality matter, reliability is more important than speed.
-This template ensures that stock is always consistent, even under concurrent access.
+- Node.js
+- TypeScript
+- Express v5 (intentional, future-proof)
+- Prisma
+- SQLite (development / tests)
+- Zod
+- Jest
 
-### Reusability
-While this example focuses on menswear, the same approach applies to:
-- sneaker stores
-- jewelers
-- limited edition drops
-- rental or reservation-based businesses
--->
+---
+
+## Architecture overview
+
+The codebase follows a layered architecture:
+
+- **Routes** — HTTP endpoints
+- **Controllers** — request / response handling
+- **Services** — business logic
+- **Database** — Prisma ORM with SQLite
+
+Stock is calculated as the **sum of stock movements**, ensuring:
+- transactional safety
+- auditability
+- correct behaviour under concurrent access
+
+---
+
+## API Documentation (Swagger)
+
+The API is fully documented using **OpenAPI (Swagger)**.
+
+When running locally, the documentation is available at:
+
